@@ -11,16 +11,6 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.post("/", (req, res, next) => {
-  addUser(req.body)
-    .then((user) => {
-      res.status(201).json(user);
-    })
-    .catch((err) => {
-      next({ status: err.status, message: err });
-    });
-});
-
 router.get("/username/:username", (req, res, next) => {
   getUser(req.params)
     .then((user) => {
