@@ -5,7 +5,7 @@ module.exports = function buildToken(user) {
   const payload = {
     subject: user.user_id,
     username: user.username,
-    email: user.user_email
+    email: user.user_email,
   };
   const options = {
     expiresIn: "1d",
