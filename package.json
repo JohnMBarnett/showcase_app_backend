@@ -6,7 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "knex": "npx knex --knexfile knexfile.js",
+    "migrate": "npx knex --knexfile knexfile.js migrate:latest",
+    "rollback": "npx knex --knexfile knexfile.js migrate:rollback",
+    "seed": "npx knex --knexfile knexfile.js seed:run",
+    "up": "npx knex --knexfile knexfile.js migrate:up",
+    "down": "npx knex --knexfile knexfile.js migrate:down",
+    "update": "npx knex --knexfile knexfile.js migrate:rollback && npx knex --k"
   },
   "repository": {
     "type": "git",
