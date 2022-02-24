@@ -13,8 +13,14 @@ const addUser = async (newUser) => {
   return newObj;
 };
 
+const getUserTasks = async (filter) => {
+  const [user] = await db("users").where(filter);
+  return db("todos").where({owner_id: user.user_id});
+}
+
 module.exports = {
   getAllUsers,
   addUser,
-  getUser
+  getUser,
+  getUserTasks
 };

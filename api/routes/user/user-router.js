@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { getAllUsers, addUser, getUser } = require("./user-model");
+const { getAllUsers, addUser, getUser, getUserTasks } = require("./user-model");
 
 router.get("/", (req, res, next) => {
   getAllUsers()
@@ -28,6 +28,16 @@ router.get("/username/:username", (req, res, next) => {
     })
     .catch((err) => {
       next({ status: err.status, message: err });
+    });
+});
+
+router.get("/todos/:username", (req, res, next) => {
+  getUserTasks(req.params)
+    .then((todoArr) => {
+      res.status(200).json(todoArr);
+    })
+    .catch((err) => {
+      next(err);
     });
 });
 
