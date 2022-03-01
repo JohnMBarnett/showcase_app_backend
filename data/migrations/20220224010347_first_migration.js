@@ -3,25 +3,13 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema
-    .createTable("users", (table) => {
-      table.increments("user_id");
-      table.string("username").notNullable().unique();
-      table.string("password").notNullable();
-      table.string("user_email").notNullable().unique();
-    })
-    .createTable("todos", (table) => {
-      table.increments("todo_id");
-      table.string("todo").notNullable();
-      table
-        .integer("owner_id")
-        .unsigned()
-        .notNullable()
-        .references("user_id")
-        .inTable("users")
-        .onDelete("CASCADE")
-        .onUpdate("RESTRICT");
-    });
+  return knex.schema.createTable("todos", (table) => {
+    table.increments("todo_id");
+    table.string("todo_name").notNullable();
+    table.string("profile_id");
+    table.string("todo_description");
+    table.boolean("todo_status").defaultTo(false);
+  });
 };
 
 /**
@@ -29,5 +17,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists("todos").dropTableIfExists("users");
+  return knex.schema.dropTableIfExists("todos");
 };
